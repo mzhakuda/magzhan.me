@@ -1,0 +1,193 @@
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/static/fonts/plex-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/static/fonts/plex-300-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/static/fonts/plex-600.woff2') format('woff2');
+}
+
+:root {
+  --bg: #fdfdfd;
+  --fg: #303030;
+  --muted: #707070;
+  --link: #2357cd;
+  --border: #ccc;
+  --selection: #ffc;
+  --active: #74d274;
+  --lang-shadow: transparent;
+
+  --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151615;
+    --fg: #dbdfdf;
+    --muted: #b4b6b8;
+    --link: #6eb8ff;
+    --border: #414141;
+    --selection: #19446b;
+    --lang-shadow: rgba(11, 12, 11, 0.2);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 100%; font: -apple-system-body; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.62;
+  margin: 0;
+  padding: 0 2.5em;
+  word-wrap: break-word;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+::selection { background: var(--selection); }
+
+header, main, footer {
+  width: 100%;
+  max-width: 36em;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+header { padding-top: 2.5em; }
+footer { padding-bottom: 2.5em; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1.4em 0 1em 0;
+  font-weight: 300;
+}
+
+.h1 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0 0 0.2em;
+}
+
+.live-time {
+  font-variant-numeric: tabular-nums;
+}
+
+p { margin: 1em 0; }
+
+a {
+  color: var(--link);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 0.5px;
+}
+
+a[href^="http"]:not([href*="magzhan.me"]) {
+  position: relative;
+  padding-right: 0.5em;
+}
+
+a[href^="http"]:not([href*="magzhan.me"])::after {
+  content: '┓' / ', external';
+  font-family: var(--sans);
+  font-size: 0.5em;
+  line-height: 1em;
+  text-decoration: none;
+  position: absolute;
+  margin-top: calc(1rem - 1.7em);
+}
+
+.inline-hr {
+  display: inline-block;
+  border: 0;
+  border-left: 0.3rem solid var(--border);
+  height: 0.3rem;
+  margin: 0 0.4rem;
+  vertical-align: middle;
+  align-self: center;
+}
+
+.inline-nav {
+  margin: 1em 0;
+}
+
+nav.about {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  margin-top: 1em;
+  color: var(--muted);
+}
+
+nav.about a {
+  color: inherit;
+}
+
+nav.about a + a {
+  margin-left: 0.6em;
+}
+
+nav.lang {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  display: inline-flex;
+  margin-top: 2em;
+  white-space: nowrap;
+  box-shadow: 0 5px 15px var(--lang-shadow);
+  border: 0.5px solid var(--border);
+  border-radius: 0.4em;
+  overflow: auto;
+  max-width: 100%;
+  gap: 1em;
+  padding: 0 0.5em;
+  box-sizing: border-box;
+}
+
+nav.lang a {
+  color: var(--muted);
+  padding: 0.5em;
+  text-decoration: none;
+}
+
+nav.lang a::before {
+  content: "○";
+  color: var(--border);
+  padding-right: 10px;
+}
+
+nav.lang a:hover::before {
+  content: "●";
+}
+
+nav.lang a[aria-current="true"]::before {
+  content: "●";
+  color: var(--active);
+}
+
+nav.lang a:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

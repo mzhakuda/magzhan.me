@@ -1,0 +1,18 @@
+{{define "inline-nav"}}
+  <nav aria-label="{{.Label}}" class="inline-nav">
+    {{range $i, $l := .Items}}
+      {{if $i}}<hr class="inline-hr">{{end}}
+      <a href="{{$l.URL}}"{{if $l.Rel}} rel="{{$l.Rel}}"{{end}}>{{$l.Label}}</a>
+    {{end}}
+  </nav>
+{{end}}
+
+{{define "content"}}
+  {{range .Bio}}
+    <p>{{.}}</p>
+  {{end}}
+
+  {{if .Links.Items}}{{template "inline-nav" .Links}}{{end}}
+  <br>
+  {{template "inline-nav" .Socials}}
+{{end}}

@@ -1,0 +1,44 @@
+{{define "layout"}}<!doctype html>
+<html lang="{{.Locale.LangTag}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{.Locale.Title}}</title>
+  <meta name="description" content="{{.Locale.Tagline}}">
+  <meta property="og:title" content="{{.Locale.Title}}">
+  <meta property="og:description" content="{{.Locale.Tagline}}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://magzhan.me/static/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://magzhan.me/static/og.png">
+  <link rel="icon" href="/static/fav.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/css/site.css">
+  <script src="/static/vendor/htmx.min.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1 class="h1">{{.Locale.Title}}</h1>
+    <br>
+  </header>
+
+  <main>
+    {{template "content" .}}
+
+    {{if gt (len .Profile.Languages) 1}}
+    <nav class="lang" aria-label="Language">
+      {{range .Profile.Languages}}
+        <a href="{{.Path}}"{{if eq .Code $.Locale.Lang}} aria-current="true"{{end}}>{{.Label}}</a>
+      {{end}}
+    </nav>
+    {{end}}
+  </main>
+
+  <footer>
+    <nav class="about" aria-label="{{.Locale.NavAbout}}">
+      <a href="https://github.com/mzhakuda/magzhan.me">{{.Locale.FooterSource}}</a>
+    </nav>
+  </footer>
+</body>
+</html>{{end}}
