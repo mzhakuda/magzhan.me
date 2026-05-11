@@ -14,5 +14,13 @@
     "nav_links": "Links",
     "nav_social": "Social",
     "nav_about": "About this site",
-    "footer_source": "View source"
+    "footer_source": "View source",
+    "cv": {
+        "page_title": "CV — Zhakuda Magzhan Ardakuly",
+        "tab_text": "Text",
+        "tab_pdf": "PDF",
+        "download": "Download PDF",
+        "fallback_open": "Open PDF",
+        "text_placeholder": "Text version coming soon."
+    }
 }

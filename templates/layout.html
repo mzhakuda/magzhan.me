@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{.Locale.Title}}</title>
+  <title>{{block "title" .}}{{.Locale.Title}}{{end}}</title>
   <meta name="description" content="{{.Locale.Tagline}}">
   <meta property="og:title" content="{{.Locale.Title}}">
   <meta property="og:description" content="{{.Locale.Tagline}}">

@@ -1,0 +1,17 @@
+{{define "title"}}{{.Locale.CV.PageTitle}}{{end}}
+
+{{define "content"}}
+  <nav class="inline-nav cv-tabs" aria-label="View">
+    <a href="/text">{{.Locale.CV.TabText}}</a>
+    <hr class="inline-hr">
+    <a href="/pdf" aria-current="page">{{.Locale.CV.TabPDF}}</a>
+  </nav>
+
+  <iframe class="cv-pdf"
+          src="/static/cv/magzhan-zhakuda.pdf#view=FitH"
+          title="{{.Locale.CV.PageTitle}}"></iframe>
+
+  <p class="cv-download">
+    <a href="/static/cv/magzhan-zhakuda.pdf" download>{{.Locale.CV.Download}}</a>
+  </p>
+{{end}}

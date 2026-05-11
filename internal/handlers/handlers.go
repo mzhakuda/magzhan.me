@@ -75,6 +75,29 @@ func (s *Server) NotFound(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func (s *Server) cvPage() Page {
+	return Page{
+		Locale:  s.Locales.Get(s.Profile.DefaultLang),
+		Profile: s.Profile,
+	}
+}
+
+func (s *Server) CVRedirect(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "/pdf", http.StatusFound)
+}
+
+func (s *Server) CVPDF() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		s.render(w, "cv_pdf", http.StatusOK, s.cvPage())
+	}
+}
+
+func (s *Server) CVText() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		s.render(w, "cv_text", http.StatusOK, s.cvPage())
+	}
+}
+
 func (s *Server) Time(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.Header().Set("Cache-Control", "no-store")

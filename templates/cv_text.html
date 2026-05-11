@@ -1,0 +1,11 @@
+{{define "title"}}{{.Locale.CV.PageTitle}}{{end}}
+
+{{define "content"}}
+  <nav class="inline-nav cv-tabs" aria-label="View">
+    <a href="/text" aria-current="page">{{.Locale.CV.TabText}}</a>
+    <hr class="inline-hr">
+    <a href="/pdf">{{.Locale.CV.TabPDF}}</a>
+  </nav>
+
+  <p>{{.Locale.CV.TextPlaceholder}} <a href="/pdf">{{.Locale.CV.TabPDF}}</a>.</p>
+{{end}}

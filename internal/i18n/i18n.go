@@ -10,20 +10,30 @@ import (
 )
 
 type Locale struct {
-	Lang         string   `json:"lang"`
-	LangTag      string   `json:"lang_tag"`
-	Title        string   `json:"title"`
-	Tagline      string   `json:"tagline"`
-	Bio          []string `json:"bio"`
-	City         string   `json:"city"`
-	Company      string   `json:"company"`
-	CompanyURL   string   `json:"company_url"`
-	NavLinks     string   `json:"nav_links"`
-	NavSocial    string   `json:"nav_social"`
-	NavAbout     string   `json:"nav_about"`
-	FooterSource string   `json:"footer_source"`
+	Lang         string     `json:"lang"`
+	LangTag      string     `json:"lang_tag"`
+	Title        string     `json:"title"`
+	Tagline      string     `json:"tagline"`
+	Bio          []string   `json:"bio"`
+	City         string     `json:"city"`
+	Company      string     `json:"company"`
+	CompanyURL   string     `json:"company_url"`
+	NavLinks     string     `json:"nav_links"`
+	NavSocial    string     `json:"nav_social"`
+	NavAbout     string     `json:"nav_about"`
+	FooterSource string     `json:"footer_source"`
+	CV           CVStrings  `json:"cv"`
 
 	bioPrepared []string
+}
+
+type CVStrings struct {
+	PageTitle       string `json:"page_title"`
+	TabText         string `json:"tab_text"`
+	TabPDF          string `json:"tab_pdf"`
+	Download        string `json:"download"`
+	FallbackOpen    string `json:"fallback_open"`
+	TextPlaceholder string `json:"text_placeholder"`
 }
 
 type Registry struct {

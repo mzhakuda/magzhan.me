@@ -191,3 +191,25 @@ nav.lang a:focus-visible {
   outline-offset: 2px;
   border-radius: 2px;
 }
+
+.cv-tabs a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cv-pdf {
+  width: 100%;
+  height: 85vh;
+  border: 0;
+  margin: 1em 0;
+}
+
+.cv-download {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.cv-download a {
+  color: inherit;
+}

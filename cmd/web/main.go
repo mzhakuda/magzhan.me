@@ -59,6 +59,10 @@ func main() {
 		mux.Handle("GET "+lang.Path+"{$}", srv.Home(lang.Code))
 	}
 
+	mux.HandleFunc("GET cv.magzhan.me/{$}", srv.CVRedirect)
+	mux.Handle("GET cv.magzhan.me/pdf", srv.CVPDF())
+	mux.Handle("GET cv.magzhan.me/text", srv.CVText())
+
 	mux.HandleFunc("GET /api/time", srv.Time)
 	mux.HandleFunc("GET /", srv.NotFound)
 
@@ -100,7 +104,7 @@ func logging(next http.Handler) http.Handler {
 func parseTemplates(fsys fs.FS) (map[string]*template.Template, error) {
 	const layout = "templates/layout.html"
 	out := map[string]*template.Template{}
-	for _, page := range []string{"home", "404"} {
+	for _, page := range []string{"home", "404", "cv_pdf", "cv_text"} {
 		t, err := template.ParseFS(fsys, layout, "templates/"+page+".html")
 		if err != nil {
 			return nil, fmt.Errorf("parse %s: %w", page, err)
