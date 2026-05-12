@@ -6,7 +6,7 @@
     "bio": [
         "A software engineer. Golang <a href=\"https://main.urbanup.com/14799376\">main</a>.",
         "Lives in {city}. It is currently {time}.",
-        "As recently as {todays_date}, working at <a href=\"{company_url}\">{company_name}</a>. Codes, <a href=\"https://readinglist.magzhan.me\">reads something</a>, watches too many video essays. Sometimes plays Overwatch."
+        "As recently as {todays_date}, working at <a href=\"{company_url}\">{company_name}</a>. Codes, <a href=\"https://reading.magzhan.me\">reads something</a>, watches too many video essays. Sometimes plays Overwatch."
     ],
     "city": "Almaty",
     "company": "BCC",
