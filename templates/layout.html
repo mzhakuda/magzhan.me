@@ -15,12 +15,10 @@
   <meta name="twitter:image" content="https://magzhan.me/static/og.png">
   <link rel="icon" href="/static/fav.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/css/site.css">
-  <script src="/static/vendor/htmx.min.js" defer></script>
 </head>
 <body>
   <header>
-    <h1 class="h1">{{.Locale.Title}}</h1>
-    <br>
+    <h1 class="h1"><a href="https://magzhan.me/">{{.Locale.Title}}</a></h1>
   </header>
 
   <main>
@@ -34,11 +32,5 @@
     </nav>
     {{end}}
   </main>
-
-  <footer>
-    <nav class="about" aria-label="{{.Locale.NavAbout}}">
-      <a href="https://github.com/mzhakuda/magzhan.me">{{.Locale.FooterSource}}</a>
-    </nav>
-  </footer>
 </body>
 </html>{{end}}

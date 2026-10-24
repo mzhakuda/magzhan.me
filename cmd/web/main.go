@@ -25,11 +25,6 @@ func main() {
 	addr := flag.String("addr", "127.0.0.1:8080", "address to listen on")
 	flag.Parse()
 
-	tz, err := time.LoadLocation(site.Me.Timezone)
-	if err != nil {
-		log.Fatalf("bad timezone %q: %v", site.Me.Timezone, err)
-	}
-
 	locales, err := i18n.Load(magzhanme.Locales, "locales", site.Me.DefaultLang)
 	if err != nil {
 		log.Fatalf("load locales: %v", err)
@@ -44,7 +39,6 @@ func main() {
 		Tmpl:    tmpls,
 		Locales: locales,
 		Profile: site.Me,
-		TZ:      tz,
 	}
 
 	mux := http.NewServeMux()
@@ -63,7 +57,6 @@ func main() {
 	mux.Handle("GET cv.magzhan.me/pdf", srv.CVPDF())
 	mux.Handle("GET cv.magzhan.me/text", srv.CVText())
 
-	mux.HandleFunc("GET /api/time", srv.Time)
 	mux.HandleFunc("GET /", srv.NotFound)
 
 	server := &http.Server{
@@ -116,7 +109,7 @@ func parseTemplates(fsys fs.FS) (map[string]*template.Template, error) {
 
 func cacheStatic(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if strings.HasPrefix(r.URL.Path, "/static/fonts/") || strings.HasPrefix(r.URL.Path, "/static/vendor/") {
+		if strings.HasPrefix(r.URL.Path, "/static/fonts/") {
 			w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
 		} else {
 			w.Header().Set("Cache-Control", "public, max-age=3600")

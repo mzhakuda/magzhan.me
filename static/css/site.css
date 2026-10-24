@@ -21,14 +21,13 @@
 }
 
 :root {
-  --bg: #fdfdfd;
-  --fg: #303030;
-  --muted: #707070;
-  --link: #2357cd;
-  --border: #ccc;
-  --selection: #ffc;
+  --bg: #fafaf8;
+  --fg: #1c1c1c;
+  --muted: #6b6b6b;
+  --rule: #dedcd6;
+  --accent: #2357cd;
+  --selection: #ffef9e;
   --active: #74d274;
-  --lang-shadow: transparent;
 
   --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
   --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
@@ -36,118 +35,114 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #151615;
-    --fg: #dbdfdf;
-    --muted: #b4b6b8;
-    --link: #6eb8ff;
-    --border: #414141;
+    --bg: #131413;
+    --fg: #e6e7e5;
+    --muted: #9a9c9a;
+    --rule: #333533;
+    --accent: #7bb8ff;
     --selection: #19446b;
-    --lang-shadow: rgba(11, 12, 11, 0.2);
   }
 }
 
 * { box-sizing: border-box; }
-
-html { font-size: 100%; font: -apple-system-body; }
 
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--sans);
   font-weight: 300;
-  font-size: 1.1rem;
-  line-height: 1.62;
+  font-size: 1.125rem;
+  line-height: 1.6;
   margin: 0;
-  padding: 0 2.5em;
-  word-wrap: break-word;
+  padding: 2.5rem 1.5rem;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-}
-
-main {
-  flex: 1;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection { background: var(--selection); }
 
-header, main, footer {
+header, main {
   width: 100%;
-  max-width: 36em;
+  max-width: 36rem;
   margin: 0 auto;
-  overflow: hidden;
-}
-
-header { padding-top: 2.5em; }
-footer { padding-bottom: 2.5em; }
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 1.4em 0 1em 0;
-  font-weight: 300;
 }
 
 .h1 {
-  font-size: 1.5rem;
-  font-weight: 300;
-  margin: 0 0 0.2em;
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.25rem;
+  text-wrap: balance;
 }
 
-.live-time {
-  font-variant-numeric: tabular-nums;
+.h1 a {
+  color: inherit;
+  text-decoration: none;
 }
 
 p { margin: 1em 0; }
 
 a {
-  color: var(--link);
+  color: var(--accent);
   text-underline-offset: 3px;
-  text-decoration-thickness: 0.5px;
+  text-decoration-thickness: 1px;
 }
 
-a[href^="http"]:not([href*="magzhan.me"]) {
-  position: relative;
-  padding-right: 0.5em;
+/* Home links */
+
+.links ul {
+  list-style: none;
+  margin: 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
 }
 
-a[href^="http"]:not([href*="magzhan.me"])::after {
-  content: '┓' / ', external';
-  font-family: var(--sans);
-  font-size: 0.5em;
-  line-height: 1em;
+.links a {
+  color: var(--fg);
   text-decoration: none;
-  position: absolute;
-  margin-top: calc(1rem - 1.7em);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
 }
 
-.inline-hr {
+.links a::after {
+  content: "↗" / "";
   display: inline-block;
-  border: 0;
-  border-left: 0.3rem solid var(--border);
-  height: 0.3rem;
-  margin: 0 0.4rem;
-  vertical-align: middle;
-  align-self: center;
-}
-
-.inline-nav {
-  margin: 1em 0;
-}
-
-nav.about {
-  font-family: var(--mono);
-  font-size: 0.85rem;
-  margin-top: 1em;
+  margin-left: 0.2em;
+  font-size: 0.8em;
   color: var(--muted);
+  transition: transform 0.15s, color 0.15s;
 }
 
-nav.about a {
-  color: inherit;
+.links a[href^="mailto:"]::after { content: "→" / ""; }
+
+.links a:hover,
+.links a:focus-visible {
+  color: var(--accent);
+  border-color: currentColor;
 }
 
-nav.about a + a {
-  margin-left: 0.6em;
+.links a:hover::after,
+.links a:focus-visible::after {
+  color: currentColor;
+  transform: translate(1px, -1px);
 }
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Language switcher (only rendered with 2+ languages) */
 
 nav.lang {
   font-family: var(--mono);
@@ -155,14 +150,12 @@ nav.lang {
   display: inline-flex;
   margin-top: 2em;
   white-space: nowrap;
-  box-shadow: 0 5px 15px var(--lang-shadow);
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--rule);
   border-radius: 0.4em;
   overflow: auto;
   max-width: 100%;
   gap: 1em;
   padding: 0 0.5em;
-  box-sizing: border-box;
 }
 
 nav.lang a {
@@ -173,24 +166,29 @@ nav.lang a {
 
 nav.lang a::before {
   content: "○";
-  color: var(--border);
+  color: var(--rule);
   padding-right: 10px;
 }
 
-nav.lang a:hover::before {
-  content: "●";
-}
+nav.lang a:hover::before { content: "●"; }
 
 nav.lang a[aria-current="true"]::before {
   content: "●";
   color: var(--active);
 }
 
-nav.lang a:focus-visible {
-  outline: 2px solid var(--link);
-  outline-offset: 2px;
-  border-radius: 2px;
+/* cv.magzhan.me */
+
+.inline-hr {
+  display: inline-block;
+  border: 0;
+  border-left: 0.3rem solid var(--rule);
+  height: 0.3rem;
+  margin: 0 0.4rem;
+  vertical-align: middle;
 }
+
+.inline-nav { margin: 1em 0; }
 
 .cv-tabs a[aria-current="page"] {
   text-decoration: underline;
@@ -210,6 +208,4 @@ nav.lang a:focus-visible {
   color: var(--muted);
 }
 
-.cv-download a {
-  color: inherit;
-}
+.cv-download a { color: inherit; }
